@@ -1,0 +1,13 @@
+#!/bin/bash
+
+while ./clipnotify;
+do
+  selection="$(xsel)"
+  if [[ $selection =~ ^[0-9]{13}$ ]]; then
+    seconds=$(($selection / 1000))
+    notify-send -t 5000 "$(date +'%m/%d/%y - %T' -d @$seconds)"
+  elif [[ $selection =~ ^[0-9]{10}$ ]]; then
+    notify-send -t 5000 "$(date +'%m/%d/%y - %T' -d @$selection)"
+  fi 
+done
+
